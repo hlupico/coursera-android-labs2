@@ -1,0 +1,2 @@
+include ':lab6_NotificationsLab'
+include ':lab6_NotificationsLabTest'

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Lab6_NotificationsLabTest.iml" filepath="$PROJECT_DIR$/Lab6_NotificationsLabTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lab6_NotificationsLab/lab6_NotificationsLab.iml" filepath="$PROJECT_DIR$/lab6_NotificationsLab/lab6_NotificationsLab.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lab6_NotificationsLabTest/lab6_NotificationsLabTest.iml" filepath="$PROJECT_DIR$/lab6_NotificationsLabTest/lab6_NotificationsLabTest.iml" />
+    </modules>
+  </component>
+</project>
+
