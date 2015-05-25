@@ -28,6 +28,7 @@ public class DownloaderTaskFragment extends Fragment {
 
 	private DownloadFinishedListener mCallback;
 	private Context mContext;
+    private MainActivity mParentActivity;
 	private final int MY_NOTIFICATION_ID = 11151990;
     static final String TAG_FRIEND_RES_IDS = "friends";
     private Integer mBroadcastReceiverCode;
@@ -109,19 +110,21 @@ public class DownloaderTaskFragment extends Fragment {
 
         //Pass data back to hosting Activity
         protected void onPostExecute(String[] feeds) {
-
-            if(feeds != null) {
+            Log.v(TAG, "Feeds passed to onPostExecute");
+            if(mCallback != null) {
                 mCallback.notifyDataRefreshed(feeds);
             }
         }
 
     }
 
+
     // Helper method simulates downloading Twitter data from the network
     private String[] downloadTweets(ArrayList<Integer> resourceIDS) {
 
         final int simulatedDelay = 2000;
         String[] feeds = new String[resourceIDS.size()];
+        boolean downLoadCompleted = false;
 
         try {
             for (int idx = 0; idx < resourceIDS.size(); idx++) {
@@ -152,13 +155,16 @@ public class DownloaderTaskFragment extends Fragment {
                 }
             }
 
-            downloadCompleted = true;
+            downLoadCompleted = true;
+            saveTweetsToFile(feeds);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        notify(downloadCompleted);
+        // Notify user that downloading has finished
+        notify(downLoadCompleted);
+
         return feeds;
 
     }
@@ -234,11 +240,12 @@ public class DownloaderTaskFragment extends Fragment {
                             // setAutoCancel(true).
 
                             Notification.Builder notificationBuilder = new Notification.Builder(mContext)
-                                    .setTicker(tickerText)
                                     .setSmallIcon(android.R.drawable.stat_sys_warning)
                                     .setAutoCancel(true)
                                     .setContentIntent(mContentIntent)
-                                    .setContent(mContentView);
+                                    .setContent(mContentView)
+                                    .setContentText(successMsg);
+
 
                             //Build The notificationBuilder
                             //notificationBuilder.build();
@@ -249,6 +256,7 @@ public class DownloaderTaskFragment extends Fragment {
                             mNotificationManager.notify(MY_NOTIFICATION_ID, notificationBuilder.build());
 
                             Toast.makeText(mContext, notificationSentMsg, Toast.LENGTH_LONG).show();
+                            Log.v(TAG, "Notification Message Sent");
 
                         } else {
                             Toast.makeText(mContext,
@@ -284,7 +292,5 @@ public class DownloaderTaskFragment extends Fragment {
             }
         }
     }
-
-
 	
 }

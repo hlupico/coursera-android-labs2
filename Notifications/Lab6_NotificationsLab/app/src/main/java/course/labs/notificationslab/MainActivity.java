@@ -62,7 +62,8 @@ public class MainActivity extends Activity implements SelectionListener,
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		Log.v(TAG, "onCreate() Started");
+        super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
 		mFragmentManager = getFragmentManager();
@@ -77,6 +78,7 @@ public class MainActivity extends Activity implements SelectionListener,
 
 	// One time setup of UI and retained (headless) Fragment
 	private void setupFragments() {
+        Log.v(TAG, "setupFragments()");
 		installFriendsFragment();
 
 		// The feed is fresh if it was downloaded less than 2 minutes ago
@@ -88,20 +90,22 @@ public class MainActivity extends Activity implements SelectionListener,
 
 			// TODO: Show a Toast message displaying - COMPLETE
 			// R.string.download_in_progress_string
-
+            Log.v(TAG, "Show Downloding Tweets from Network Toast");
             downloadToast = Toast.makeText(MainActivity.this, R.string.download_in_progress_string, Toast.LENGTH_LONG);
+            downloadToast.show();
 			
 			// Set up a BroadcastReceiver to receive an Intent when download
 			// finishes.
 			mRefreshReceiver = new BroadcastReceiver() {
 				@Override
 				public void onReceive(Context context, Intent intent) {
-
+                    Log.v(TAG, "Set up BroadcastReceiver to receive Intent when download finishes");
 					// TODO:
 					// Check to make sure this is an ordered broadcast
 					// Let sender know that the Intent was received
 					// by setting result code to MainActivity.IS_ALIVE
                     if(mIsOrdered == mRefreshReceiver.isOrderedBroadcast()) {
+                        Log.v(TAG, "setResultCode = 1");
                         mRefreshReceiver.setResultCode(MainActivity.IS_ALIVE);
                     }
 
@@ -149,7 +153,7 @@ public class MainActivity extends Activity implements SelectionListener,
 	// Register the BroadcastReceiver
 	@Override
 	protected void onResume() {
-        Log.v(TAG, "Entered MainActivity onResume()");
+        Log.v(TAG, "Entered MainActivity onResume() - Registered Receiver");
 		super.onResume();
 
 		// TODO:
