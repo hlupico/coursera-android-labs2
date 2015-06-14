@@ -29,26 +29,17 @@ public class DownloaderTaskFragment extends Fragment {
 		// Preserve across reconfigurations
 		setRetainInstance(true);
 		
-		// TODO: Create new DownloaderTask that "downloads" data
+		//Create new DownloaderTask that "downloads" data
         DownLoaderTask downLoaderTask = new DownLoaderTask();
-        
-		
-		// TODO: Retrieve arguments from DownloaderTaskFragment
+
+		//Retrieve arguments from DownloaderTaskFragment
 		// Prepare them for use with DownloaderTask. 
         Bundle args = getArguments();
         //.getIntegerArrayList returns the value associated with the given key
         ArrayList arrayList = args.getIntegerArrayList(TAG_FRIEND_RES_IDS);
         //Create integer array for size of arrayList passed
 
-        //TODO: REMOVE THIS LINE OF CODE
-        //Integer[] mResourceIds = new Integer[arrayList.size()];
-
-        //Initialize mResourceIds with values from arrayList
-        //arrayList must be cast to get Integer[], otherwise Object[] is returned
-        //mResourceIds = (Integer[]) arrayList.toArray(mResourceIds);
-
-
-		// TODO: Start the DownloaderTask 
+		//Start the DownloaderTask
 		downLoaderTask.execute(arrayList);
         
 
@@ -80,7 +71,7 @@ public class DownloaderTaskFragment extends Fragment {
 	}
 
 
-    // TODO: Implement an AsyncTask subclass called DownLoaderTask.
+    // Implement an AsyncTask subclass called DownLoaderTask.
     // This class must use the downloadTweets method (currently commented
     // out). Ultimately, it must also pass newly available data back to
     // the hosting Activity using the DownloadFinishedListener interface.

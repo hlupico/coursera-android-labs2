@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/hannalupico/Android/AndroidStudioApps/coursera-android-labs2/Graphics-Animation/Lab7_GraphicsLab/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="app_name">GraphicsLab</string>
+    <string name="quit_string">Quit</string>
+    <string name="random_speed_mode_string">Random Speed Mode</string>
+    <string name="single_speed_mode_string">Single Speed Mode</string>
+    <string name="still_mode_string">Still Mode</string>
+</resources>
