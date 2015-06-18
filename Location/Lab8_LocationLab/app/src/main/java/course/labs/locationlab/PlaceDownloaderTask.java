@@ -39,7 +39,7 @@ public class PlaceDownloaderTask extends AsyncTask<Location, Void, PlaceRecord> 
 
 	// Optional TODO - Put your www.geonames.org account name here if you want to
 	// use the geonames.org web service. To use this service, you must register for a free account.
-	private static String USERNAME = "YOUR_ACCOUNT_NAME";
+	private static String USERNAME = "hlupico";
 
 	private HttpURLConnection mHttpUrl;
 	private WeakReference<PlaceViewActivity> mParent;
@@ -62,7 +62,7 @@ public class PlaceDownloaderTask extends AsyncTask<Location, Void, PlaceRecord> 
         //Set up dummy data
 		if (null != parent) {
 			sStubBitmap = BitmapFactory.decodeResource(parent.getResources(),
-					R.drawable.stub);
+					R.drawable.flag);
 
 			sMockLoc1.setLatitude(37.422);
 			sMockLoc1.setLongitude(-122.084);
@@ -74,8 +74,8 @@ public class PlaceDownloaderTask extends AsyncTask<Location, Void, PlaceRecord> 
 			sMockPlaceName2 = parent.getString(R.string.berwyn_string);
 			sMockLoc3.setLatitude(0);
 			sMockLoc3.setLongitude(0);
-			sMockCountryNameInvalid = "";
-			sMockPlaceNameInvalid = "";
+			sMockCountryNameInvalid = null;
+			sMockPlaceNameInvalid = null;
 
 		}
 	}

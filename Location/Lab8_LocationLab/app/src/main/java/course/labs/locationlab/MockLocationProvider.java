@@ -4,12 +4,16 @@
 // Adapted from code found at: 
 // http://mobiarch.wordpress.com/2012/07/17/testing-with-mock-location-data-in-android/
 
-import android.content.Context;
-import android.location.Location;
-import android.location.LocationManager;
-import android.os.SystemClock;
+//The MockLocationProvider sets updates for the LastKnownLocation based
+//on the user's selection in the Options Menu
 
-public class MockLocationProvider {
+ import android.content.Context;
+ import android.location.Location;
+ import android.location.LocationManager;
+ import android.os.SystemClock;
+ import android.util.Log;
+
+ public class MockLocationProvider {
 
 	private String mProviderName;
 	private LocationManager mLocationManager;
@@ -17,7 +21,7 @@ public class MockLocationProvider {
 
 	public MockLocationProvider(String name, Context ctx) {
 		this.mProviderName = name;
-
+        Log.v("MockLocationProvider", name);
 		mLocationManager = (LocationManager) ctx
 				.getSystemService(Context.LOCATION_SERVICE);
 		mLocationManager.addTestProvider(mProviderName, false, false, false,
