@@ -127,6 +127,7 @@ public class BubbleActivity extends Activity {
 			mDisplayWidth = mFrame.getWidth();
 			mDisplayHeight = mFrame.getHeight();
 
+            Log.v(TAG, "mDisplayWidth & mDisplayHeight -  w:" + mDisplayWidth + " h: " + mDisplayHeight);
 		}
 	}
 
@@ -145,16 +146,31 @@ public class BubbleActivity extends Activity {
 			public boolean onFling(MotionEvent event1, MotionEvent event2,
 					float velocityX, float velocityY) {
 
+
+                Log.v(TAG, "Entered onFling");
+
+                boolean fling = false;
+
 				// TODO - Implement onFling actions.
 				// You can get all Views in mFrame using the
 				// ViewGroup.getChildCount() method
 
-                //mFrame.getChildCount();
+                for(int i=0; i < mFrame.getChildCount(); i++) {
 
-				
-				
-				
-				return false;
+                    BubbleView bubble = (BubbleView) mFrame.getChildAt(i);
+
+                    if(bubble.intersects(event1.getX(), event1.getY())) {
+
+                        Log.v(TAG, "Fling Bubble");
+
+                        bubble.deflect(velocityX, velocityY);
+                        fling = true;
+                        break;
+
+                    }
+                }
+
+				return fling;
 
 			}
 
@@ -248,12 +264,11 @@ public class BubbleActivity extends Activity {
 	public class BubbleView extends View {
 
 		private static final int BITMAP_SIZE = 64;
-		private static final int REFRESH_RATE = 40;
+		private static final int REFRESH_RATE = 50;
 		private final Paint mPainter = new Paint();
 		private ScheduledFuture<?> mMoverFuture;
 		private int mScaledBitmapWidth;
 		private Bitmap mScaledBitmap;
-        private static final int STEP = 1;
 
 		// location, speed and direction of the bubble
 		private float mXPos, mYPos, mDx, mDy, mRadius, mRadiusSquared;
@@ -427,7 +442,7 @@ public class BubbleActivity extends Activity {
 					// play the popping sound
 					if (wasPopped) {
 
-                        mSoundPool.play(mSoundID, 0.8f, 0.8f, 1, 0, 1f);
+                        mSoundPool.play(mSoundID, mStreamVolume/2, mStreamVolume/2, 1, 0, 1f);
 
 					}
 				}
@@ -438,11 +453,10 @@ public class BubbleActivity extends Activity {
 		private synchronized void deflect(float velocityX, float velocityY) {
 
 			//TODO - set mDx and mDy to be the new velocities divided by the REFRESH_RATE
-			
+			Log.v(TAG, "Entered deflect()");
 
-
-
-
+            mDx = velocityX/REFRESH_RATE;
+            mDy = velocityY/REFRESH_RATE;
 
 		}
 
@@ -489,8 +503,8 @@ public class BubbleActivity extends Activity {
 
 			// TODO - Move the BubbleView
 
-            mXPos += STEP;
-            mYPos += STEP;
+            mXPos += mDx;
+            mYPos += mDy;
 
             if(isOutOfView()){
                 return false;
@@ -507,9 +521,9 @@ public class BubbleActivity extends Activity {
 			// the move operation
 
             if (mXPos < 0 - mScaledBitmapWidth
-                    || mXPos > mDisplayHeight + mScaledBitmapWidth
+                    || mXPos > mDisplayWidth + mScaledBitmapWidth
                     || mYPos < 0 - mScaledBitmapWidth
-                    || mYPos > mDisplayWidth + mScaledBitmapWidth) {
+                    || mYPos > mDisplayHeight + mScaledBitmapWidth) {
                 return true;
             } else {
                 return false;
