@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/hannalupico/Android/AndroidStudioApps/coursera-android-labs2/Intents/Lab3a_IntentsLab/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="app_name">IntentsLab</string>
+    <string name="enter_string">Enter</string>
+    <string name="enter_text_here_string">Enter Text Here</string>
+    <string name="explicit_activation_button_string">Explicit Activation</string>
+    <string name="explicit_message">You have sent an Explicit Intent!</string>
+    <string name="implicit_activation_button_string">Implicit Activation</string>
+    <string name="no_text_entered">No Text Entered</string>
+    <string name="title_explicit">Explicit Activation</string>
+    <string name="title_main">Activity Loader Activity</string>
+    <!-- From: file:/Users/hannalupico/Android/AndroidStudioApps/coursera-android-labs2/Intents/Lab3a_IntentsLab/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+</resources>
