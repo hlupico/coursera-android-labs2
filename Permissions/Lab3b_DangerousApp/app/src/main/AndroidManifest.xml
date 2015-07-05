@@ -9,10 +9,8 @@
         android:targetSdkVersion="18" />
 
     <!--
-          TODO - Using a permission element,
-          define a custom permission with name
-    		  "course.labs.permissions.DANGEROUS_ACTIVITY_PERM" 
-          and "dangerous" protection level.
+          TODO - Using a permission element, define a custom permission with name
+          "course.labs.permissions.DANGEROUS_ACTIVITY_PERM" and "dangerous" protection level.
     -->
     
     <permission android:name="course.labs.permissions.DANGEROUS_ACTIVITY_PERM" android:protectionLevel="dangerous"></permission>
@@ -42,6 +40,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+
         </activity>
     </application>
 

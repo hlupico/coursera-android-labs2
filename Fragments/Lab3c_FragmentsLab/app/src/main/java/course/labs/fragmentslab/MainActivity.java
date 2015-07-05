@@ -19,14 +19,14 @@ public class MainActivity extends Activity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_activity);
 
-		// If the layout is single-pane, create the FriendsFragment 
-		// and add it to the Activity
+		// If the layout is single-pane,
+		// create the FriendsFragment and add it to the Activity
 
 		if (!isInTwoPaneMode()) {
 			
 			mFriendsFragment = new FriendsFragment();
 
-			//TODO 1 - add the FriendsFragment to the fragment_container
+			// Add the FriendsFragment to the fragment_container
 			FragmentManager fragmentManager = getFragmentManager();
 			FragmentTransaction transaction = fragmentManager.beginTransaction();
 			
@@ -58,7 +58,6 @@ public class MainActivity extends Activity implements
 	}
 
 	// Display selected Twitter feed
-
 	public void onItemSelected(int position) {
 
 		Log.i(TAG, "Entered onItemSelected(" + position + ")");
@@ -72,7 +71,7 @@ public class MainActivity extends Activity implements
 
 		if (!isInTwoPaneMode()) {
 
-			//TODO 2 - replace the fragment_container with the FeedFragment
+			// Replace the fragment_container with the FeedFragment
 			FragmentManager fragmentManager = getFragmentManager();
 			FragmentTransaction transaction = fragmentManager.beginTransaction();
 			

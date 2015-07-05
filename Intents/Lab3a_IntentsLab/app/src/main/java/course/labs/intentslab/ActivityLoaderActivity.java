@@ -19,7 +19,7 @@ public class ActivityLoaderActivity extends Activity {
 	// For use with app chooser
 	static private final String CHOOSER_TEXT = "Load " + URL + " with:";
     
-	// TextView that displays user-entered text from ExplicitlyLoadedActivity runs
+	// TextView that displays user-entered text from ExplicitlyLoadedActivity
 	private TextView mUserTextView;
 	private String mDataText;
     
@@ -33,14 +33,14 @@ public class ActivityLoaderActivity extends Activity {
         
 		// Declare and setup Explicit Activation button
 		Button explicitActivationButton = (Button) findViewById(R.id.explicit_activation_button);
-		explicitActivationButton.setOnClickListener(new OnClickListener() {
+        explicitActivationButton.setOnClickListener(new OnClickListener() {
             
 			// Call startExplicitActivation() when pressed
 			@Override
 			public void onClick(View v) {
-				
+
+                // Helper method creates and starts intent, calling ExplicitlyLoadedActivity
 				startExplicitActivation();
-                
 			}
 		});
         
@@ -51,46 +51,75 @@ public class ActivityLoaderActivity extends Activity {
 			// Call startImplicitActivation() when pressed
 			@Override
 			public void onClick(View v) {
-                
+
+                // Helper method creates and starts intent, loading App Chooser
 				startImplicitActivation();
-                
 			}
 		});
         
 	}
-    
 	
 	// Start the ExplicitlyLoadedActivity
-	
 	private void startExplicitActivation() {
         
 		Log.i(TAG,"Entered startExplicitActivation()");
 		
-		// TODO - (1.a)Create a new intent to launch the ExplicitlyLoadedActivity class
+		// TODO - Create a new intent to launch the ExplicitlyLoadedActivity class
 		Intent explicitIntent = new Intent(ActivityLoaderActivity.this, ExplicitlyLoadedActivity.class);
 		
-		// TODO - (1.a) Start an Activity using that intent and the request code defined above
-		//ActivityLoaderActivity.this.
+		// TODO - Start an Activity using that intent and the request code defined above
+        // Request code is used to identify the intent request
+        // When you receive the result Intent, the callback provides the same request code
+        // so that your app can properly identify the result and determine how to handle it.
+        // Result code returned will either be RESULT_OK or RESULT_CANCELLED
 		startActivityForResult(explicitIntent, GET_TEXT_REQUEST_CODE);
         
 	}
-    
+
+    // When an intent is started using startActivityForResult()
+    // onActivityResult is the callback method used to handle the
+    // intent passed to the requesting activity from the response activity
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        Log.i(TAG, "Entered onActivityResult()");
+
+        // TODO - Process the result only if this method received both a
+        // RESULT_OK result code and a recognized request code
+        // If so, update the Textview showing the user-entered text.
+
+        // Check which request we're responding to
+        if (requestCode == GET_TEXT_REQUEST_CODE) {
+
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+
+                //Get text through .getStringExtra(), pass key as parameter
+                mDataText = data.getStringExtra("STORE_TEXT");
+
+                //Set text to TextView
+                mUserTextView.setText(mDataText);
+            }
+        }
+
+    }
+
 	// Start a Browser Activity to view a web page or its URL
-	
 	private void startImplicitActivation() {
         
 		Log.i(TAG, "Entered startImplicitActivation()");
        
 		// TODO - Create a base intent for viewing a URL
-		// (HINT:  second parameter uses Uri.parse())
+		// Second parameter uses Uri.parse())
 		
         Intent baseIntent = new Intent(Intent.ACTION_VIEW);
         baseIntent.setData(Uri.parse(URL));
         
         Log.i(TAG, "BaseIntent Created");
-		// TODO - Create a chooser intent, for choosing which Activity
-		// will carry out the baseIntent
-		// (HINT: Use the Intent class' createChooser() method)
+		// TODO - Create a chooser intent, for choosing which
+		// Activity will carry out the baseIntent
+		// Use the Intent class' createChooser() method
 		
 		Intent chooserIntent = Intent.createChooser(baseIntent, CHOOSER_TEXT);
         
@@ -104,27 +133,5 @@ public class ActivityLoaderActivity extends Activity {
 		}
 		
 	}
-    
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        
-		Log.i(TAG, "Entered onActivityResult()");
-		
-		// TODO - Process the result only if this method received both a
-		// RESULT_OK result code and a recognized request code
-		// If so, update the Textview showing the user-entered text.
 
-		// Check which request we're responding to
-	    if (requestCode == GET_TEXT_REQUEST_CODE) {
-	        // Make sure the request was successful
-	        if (resultCode == RESULT_OK) {
-	            
-	        	//Get text through .getStringExtra(), pass key as parameter
-	        	mDataText = data.getStringExtra("STORE_TEXT");
-	        	//Set text to TextView
-	        	mUserTextView.setText(mDataText);
-	        }
-	    }
-    
-    }
 }

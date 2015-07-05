@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.content.Intent;
+
+
+// ActivityOne controls the first screen that the user sees upon opening the application
 
 public class ActivityOne extends Activity {
 
-	// Use these as keys when you're saving state between reconfigurations
+	// Use these as keys when saving state between reconfigurations
 	private static final String RESTART_KEY = "restart";
 	private static final String RESUME_KEY = "resume";
 	private static final String START_KEY = "start";
@@ -21,24 +23,24 @@ public class ActivityOne extends Activity {
 	// String for LogCat documentation
 	private final static String TAG = "Lab-ActivityOne";
 
-	// Lifecycle counters
-
 	// TODO:
-	// Create variables named
-	// mCreate, mRestart, mStart and mResume
-	// to count calls to onCreate(), onRestart(), onStart() and
-	// onResume(). These variables should not be defined as static.
+	// Create variables mCreate, mRestart, mStart and mResume
+	// These variables will keep track of the calls made to
+	// onCreate(), onRestart(), onStart() and onResume().
+
 	private int mCreate;
 	private int mRestart;
 	private int mStart;
 	private int mResume;
-	
+
+    // Defining these variables as private restricts other portions
+    // of the program from changing their values
 	// You will need to increment these variables' values when their
 	// corresponding lifecycle methods get called.
 
 	// TODO: Create variables for each of the TextViews
-	// named mTvCreate, mTvRestart, mTvStart, mTvResume.
-	// for displaying the current count of each counter variable
+	// mTvCreate, mTvRestart, mTvStart, mTvResume will
+	// display the current count of each counter variable
 
 	TextView mTvCreate;
 	TextView mTvRestart;
@@ -51,7 +53,7 @@ public class ActivityOne extends Activity {
 		setContentView(R.layout.activity_one);
 		
 		// TODO: Assign the appropriate TextViews to the TextView variables
-		// Hint: Access the TextView by calling Activity's findViewById()
+		// Access the TextView by calling Activity's findViewById()
 		// textView1 = (TextView) findViewById(R.id.textView1);
 		
 		mTvCreate = (TextView) findViewById(R.id.create);
@@ -60,17 +62,16 @@ public class ActivityOne extends Activity {
 		mTvResume = (TextView) findViewById(R.id.resume);
 		
 		Button launchActivityTwoButton = (Button) findViewById(R.id.bLaunchActivityTwo);
-		launchActivityTwoButton.setOnClickListener(new OnClickListener() {
+
+        launchActivityTwoButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				// TODO:
-				// Launch Activity Two
-				// Hint: use Context's startActivity() method
-				
-				// Create an intent stating which Activity you would like to
-				// start
+				// TODO: Launch Activity Two
+
+				// Create an intent to start ActivityTwo
 				Intent intent = new Intent(ActivityOne.this, ActivityTwo.class);
+
 				// Launch the Activity using the intent
 				startActivity(intent);
 			}
@@ -78,22 +79,25 @@ public class ActivityOne extends Activity {
 
 		// Has previous state been saved?
 		if (savedInstanceState != null) {
-			// TODO:
-			// Restore value of counters from saved state
+
+			// TODO: Restore value of counters from saved state
 			// Only need 4 lines of code, one for every count variable
-			mCreate = savedInstanceState.getInt(CREATE_KEY);
+
+            mCreate = savedInstanceState.getInt(CREATE_KEY);
 			mRestart = savedInstanceState.getInt(RESTART_KEY);
 			mStart = savedInstanceState.getInt(START_KEY);
 			mResume = savedInstanceState.getInt(RESUME_KEY);
+
 		}else{
+
 			//Initialize members with default values for a new instance
-			mCreate = 0;
+
+            mCreate = 0;
 			mRestart = 0;
 			mStart = 0;
 			mResume = 0;
 		}
 
-		// Emit LogCat message
 		Log.i(TAG, "Entered the onCreate() method");
 
 		// TODO:
@@ -110,7 +114,6 @@ public class ActivityOne extends Activity {
 	public void onStart() {
 		super.onStart();
 
-		// Emit LogCat message
 		Log.i(TAG, "Entered the onStart() method");
 
 		// TODO:
@@ -125,7 +128,6 @@ public class ActivityOne extends Activity {
 	public void onResume() {
 		super.onResume();
 
-		// Emit LogCat message
 		Log.i(TAG, "Entered the onResume() method");
 
 		// TODO:
@@ -140,7 +142,6 @@ public class ActivityOne extends Activity {
 	public void onPause() {
 		super.onPause();
 
-		// Emit LogCat message
 		Log.i(TAG, "Entered the onPause() method");
 	}
 
@@ -148,7 +149,6 @@ public class ActivityOne extends Activity {
 	public void onStop() {
 		super.onStop();
 
-		// Emit LogCat message
 		Log.i(TAG, "Entered the onStop() method");
 	}
 
@@ -156,7 +156,6 @@ public class ActivityOne extends Activity {
 	public void onRestart() {
 		super.onRestart();
 
-		// Emit LogCat message
 		Log.i(TAG, "Entered the onRestart() method");
 
 		// TODO:
@@ -171,12 +170,12 @@ public class ActivityOne extends Activity {
 	public void onDestroy() {
 		super.onDestroy();
 
-		// Emit LogCat message
 		Log.i(TAG, "Entered the onDestroy() method");
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
+
 		// TODO:
 		// Save state information with a collection of key-value pairs
 		// 4 lines of code, one for every count variable
@@ -190,10 +189,9 @@ public class ActivityOne extends Activity {
 
 	}
 
-	// Updates the displayed counters
-	// This method expects that the counters and TextView variables use the
-	// names
-	// specified above
+	// Update the displayed counters
+	// This method expects that the counters and TextView variables
+	// use the names specified above
 	public void displayCounts() {
 		// TODO - uncomment these lines
 		mTvCreate.setText("onCreate() calls: " + mCreate);

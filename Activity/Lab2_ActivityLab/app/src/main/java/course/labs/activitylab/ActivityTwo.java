@@ -19,8 +19,6 @@ public class ActivityTwo extends Activity {
 	// String for LogCat documentation
 	private final static String TAG = "Lab-ActivityTwo";
 
-	// Lifecycle counters
-
 	// TODO:
 	// Create variables named 	
 	// mCreate, mRestart, mStart and mResume 	
@@ -171,9 +169,8 @@ public class ActivityTwo extends Activity {
 
 		// TODO:
 		// Save counter state information with a collection of key-value pairs
-		// 4 lines of code, one for every count variable// TODO:
-		// Save state information with a collection of key-value pairs
 		// 4 lines of code, one for every count variable
+
 		savedInstanceState.putInt(START_KEY, mStart);
 		savedInstanceState.putInt(CREATE_KEY, mCreate);
 		savedInstanceState.putInt(RESTART_KEY, mRestart);
